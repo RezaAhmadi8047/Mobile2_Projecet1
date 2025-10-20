@@ -19,29 +19,32 @@ public class EnterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter);
 
         EditText nameGet, familyGet, teacherIdGet;
-        String name,family,techerId;
         Intent intent=new Intent(EnterActivity.this,ShowActivity.class);
 
         nameGet=findViewById(R.id.name);
         familyGet=findViewById(R.id.family);
-        teacherIdGet =findViewById(R.id.techerId);
+        teacherIdGet =findViewById(R.id.teacherId);
 
       Button btnSave = findViewById(R.id.btnSave) ;
       btnSave.setOnClickListener(new View.OnClickListener() {
           @SuppressLint("WrongViewCast")
           @Override
           public void onClick(View v) {
-              String name=nameGet.getText().toString();
-              String family=familyGet.getText().toString();
-              String techerId=teacherIdGet.getText().toString();
+               TeacherClass.addTeacher(nameGet.getText().toString(),familyGet.getText().toString(),teacherIdGet.getText().toString());
 
-               intent.putExtra("name",name);
-               intent.putExtra("family",family);
-               intent.putExtra("techerId",techerId);
-               startActivity(intent);
+               nameGet.setText("");
+               familyGet.setText("");
+               teacherIdGet.setText("");
 
           }
       });
 
+      Button btnShow=findViewById(R.id.btnShow);
+      btnShow.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              startActivity(intent);
+          }
+      });
     }
 }

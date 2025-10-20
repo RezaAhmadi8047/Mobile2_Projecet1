@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ShowActivity extends AppCompatActivity {
     @Override
@@ -15,27 +17,39 @@ public class ShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        String family = intent.getStringExtra("family");
-        String teacherId = intent.getStringExtra("teacherId");
-
-        TextView infoTecher = findViewById(R.id.infoTecher);
-        infoTecher.setText("نام: " + name + "\n"
-                + "نام خانوادگی: " + family + "\n"
-                + "شماره استاد: " + teacherId);
-
         SharedPreferences sharedPre;
         sharedPre = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
-        infoTecher.setOnClickListener(new View.OnClickListener() {
+        RecyclerView recyclerView_item=findViewById(R.id.recycleviewItem);
+        AdapterTeacher adapterTeacher=new AdapterTeacher();
+
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView_item.setLayoutManager(layoutManager);
+
+        recyclerView_item.setAdapter(adapterTeacher);
+
+        adapterTeacher.setOnItemClickListener(new AdapterTeacher.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPre.edit();
-                editor.putString("saved_text", infoTecher.getText().toString());
+            public void onItemClick(int position) {
+                TeacherClass teacher = new TeacherClass();
+
+                String name = teacher.getNames().get(position);
+                String family = teacher.getFamily().get(position);
+                String teacherId = teacher.getTeacherIds().get(position);
+
+
+                SharedPreferences sharedPref = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("name", name);
+                editor.putString("family", family);
+                editor.putString("teacherId", teacherId);
                 editor.apply();
+
+
             }
         });
+
 
     }
 

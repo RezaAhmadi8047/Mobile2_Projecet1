@@ -97,7 +97,7 @@
             android:gravity="center">
 
             <EditText
-                android:id="@+id/techerId"
+                android:id="@+id/teacherId"
                 android:layout_width="200dp"
                 android:paddingRight="16dp"
                 android:paddingTop="6dp"
@@ -132,12 +132,12 @@
             android:text="ذخیره"
             android:textSize="25dp"
             android:fontFamily="sans-serif-black"/>
-<!--        <Button-->
-<!--            android:id="@+id/btnShow"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:text="نماش لیست"-->
-<!--            android:textSize="25dp"-->
-<!--            android:fontFamily="sans-serif-black"/>-->
+        <Button
+            android:id="@+id/btnShow"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="نماش لیست"
+            android:textSize="25dp"
+            android:fontFamily="sans-serif-black"/>
     </LinearLayout>
 </LinearLayout>
